@@ -3,6 +3,7 @@ package com.ecom.gg.ecomgg.controller;
 import com.ecom.gg.ecomgg.entity.Products;
 import com.ecom.gg.ecomgg.repository.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ public class ProductsController {
         this.productsRepository = productsRepository;
     }
 
+    @PostMapping("/")
     public Products save(@RequestBody Products products){
         Products savedProducts = productsRepository.save(products);
         return savedProducts;
