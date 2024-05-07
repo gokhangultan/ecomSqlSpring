@@ -9,12 +9,12 @@ githubUsername: 'gokhangultan'
 <!-- Greeting -->
 # Hey ! 👋
 
-### 🔗  <code><a href="https://gokhan-ecommerce.vercel.app/" target="_blank"> Vercel Deployment </a></code>
+### 🔗  <code><a href="https://gokhangultan.com/" target="_blank"> My Portfolio </a></code>
 
 ## Getting Started 🖱️
-To get started  you can simply clone this `ecommerce-demo` repository and install the dependencies.
+To get started  you can simply clone this `ecomSqlSpring` repository and install the dependencies.
 
-Clone the `gokhan-ecommerce` repository using git:
+Clone the `ecomSqlSpring` repository using git:
 
 ```bash
 git clone https://github.com/gokhangultan/ecomSqlSpring.git
