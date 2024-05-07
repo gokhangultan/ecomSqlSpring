@@ -14,18 +14,34 @@ import lombok.NoArgsConstructor;
 public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String description;
-    private long category_id;
-    private String images;
     //Best practice snake_case ile column vermeyi unutma
+    @Column(name="id")
+    private long id;
+
+    @Column(name="price")
+    private double price;
+
+    @Column(name="description")
+    private String description;
+
+    @Column(name="images")
+    private String images;
+
+    @Column(name="category")
+    private String category;
+
     @Column(name="name")
     private String name;
-    private double price;
+
+    @Column(name="rating")
     private double rating;
-    private Integer sell_count;
-    private Integer stock;
-    private Integer store_id;
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
+
+    @Column(name="sell_count")
+    private long sellCount;
+
+    @Column(name="stock")
+    private long stock;
+
+    @Column(name="store_id")
+    private long storeId;
 }
