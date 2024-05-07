@@ -90,5 +90,7 @@ Hello, I'm Gökhan. I graduated from Celal Bayar University, Department of Compu
 <h4 className="flex justify-center align-middle"> Thanks for Visiting!</h4>
 
 - 📫 How to reach me: ...
+- <code><a href="https://gokhangultan.com" target="_blank">Via Website 👨‍💻 </a></code>
+<code><a href="https://www.linkedin.com/in/g%C3%B6khan-g%C3%BCltan-8499b0174/" target="_blank">Via Linkedin 💼 </a></code>
 <code><a href="mailto:gultangokhan@gmail.com" target="_blank">Via Email 📫 </a></code>
 <code><a href="tel:+905050279494" target="_blank">Via Phone 📞 </a></code>
