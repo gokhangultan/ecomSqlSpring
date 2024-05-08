@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -53,4 +54,11 @@ public class Products {
             inverseJoinColumns = @JoinColumn(name="category_id")
     )
     private List<Categories> categoriesList;
+
+    public void addCategories(Categories categories){
+        if(categoriesList == null){
+            categoriesList = new ArrayList<>();
+        }
+        categoriesList.add(categories);
+    }
 }
