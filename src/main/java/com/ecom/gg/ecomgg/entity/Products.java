@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -44,4 +46,11 @@ public class Products {
 
     @Column(name="store_id")
     private long storeId;
+
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinTable(name="products_categories",schema="ecomgg",
+            joinColumns = @JoinColumn(name="product_id"),
+            inverseJoinColumns = @JoinColumn(name="category_id")
+    )
+    private List<Categories> categoriesList;
 }
