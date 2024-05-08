@@ -22,7 +22,7 @@ public class CategoriesServiceImpl implements CategoriesService{
     public CategoriesResponse findById(long id) {
        Optional<Categories> categoriesOptional = categoriesRepository.findById(id);
        if(categoriesOptional.isPresent()){
-           return new CategoriesResponse(categoriesOptional.get().getTitle(), categoriesOptional.get().getCode());
+           return new CategoriesResponse(categoriesOptional.get().getTitle(), categoriesOptional.get().getCode(),categoriesOptional.get().getImage(),categoriesOptional.get().getRating(),categoriesOptional.get().getId());
        }
        //throw exception
         return null;
