@@ -19,12 +19,12 @@ public class AuthenticationService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthenticationService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public AuthenticationService(UserRepository userRepository, RoleRepository roleRepository,
+                                 PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
-
 
     public ApplicationUser register(String fullName, String email, String password){
         String encodedPassword = passwordEncoder.encode(password);
@@ -34,11 +34,12 @@ public class AuthenticationService {
         roles.add(userRole);
 
         ApplicationUser user = new ApplicationUser();
-        user.setPassword(encodedPassword);
         user.setFullName(fullName);
         user.setEmail(email);
+        user.setPassword(encodedPassword);
         user.setAuthorities(roles);
 
         return userRepository.save(user);
     }
 }
+
