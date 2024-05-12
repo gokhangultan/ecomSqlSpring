@@ -7,10 +7,7 @@ import com.ecom.gg.ecomgg.entity.Products;
 import com.ecom.gg.ecomgg.repository.ProductsRepository;
 import com.ecom.gg.ecomgg.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,5 +33,11 @@ public class ProductsController {
         }
        ProductsResponse savedProductsResponse = productsService.save(products);
         return savedProductsResponse;
+    }
+
+
+    @GetMapping("/")
+    public List<ProductsResponse> getAllProducts(){
+        return productsService.getAllProducts();
     }
 }

@@ -6,7 +6,9 @@ import com.ecom.gg.ecomgg.repository.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductsServiceImpl implements ProductsService{
@@ -47,4 +49,20 @@ public class ProductsServiceImpl implements ProductsService{
         productsRepository.deleteById(willRemoveProductsResponse.id());
         return null;
     }
+
+
+    @Override
+    public List<ProductsResponse> getAllProducts() {
+        List<Products> productsList = productsRepository.findAll();
+        return productsList.stream()
+                .map(this::mapToProductsResponse)
+                .collect(Collectors.toList());
+    }
+
+    private ProductsResponse mapToProductsResponse(Products products) {
+        return new ProductsResponse(products.getId(), products.getPrice(), products.getDescription(), products.getImages(),
+                products.getCategory(), products.getName(), products.getRating(), products.getSellCount(), products.getStock(),
+                products.getStoreId());
+    }
+
 }
