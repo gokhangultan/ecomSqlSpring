@@ -4,6 +4,7 @@ import com.ecom.gg.ecomgg.dto.ProductsCategoriesRequest;
 import com.ecom.gg.ecomgg.dto.ProductsResponse;
 import com.ecom.gg.ecomgg.entity.Categories;
 import com.ecom.gg.ecomgg.entity.Products;
+import com.ecom.gg.ecomgg.exceptions.ProductsException;
 import com.ecom.gg.ecomgg.repository.ProductsRepository;
 import com.ecom.gg.ecomgg.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ProductsController {
             products.addCategories(categories);
 
         }
-       ProductsResponse savedProductsResponse = productsService.save(products);
+        ProductsResponse savedProductsResponse = productsService.save(products);
         return savedProductsResponse;
     }
 
@@ -49,8 +50,9 @@ public class ProductsController {
         if (productsResponse != null) {
             return new ResponseEntity<>(productsResponse, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new ProductsException("Ürün bulunamadı: " + id, HttpStatus.NOT_FOUND);
         }
     }
+
 
 }
