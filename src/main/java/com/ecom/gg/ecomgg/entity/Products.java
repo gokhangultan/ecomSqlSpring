@@ -33,6 +33,7 @@ public class Products {
     @Column(name="category")
     private String category;
 
+
     @Column(name="name")
     private String name;
 

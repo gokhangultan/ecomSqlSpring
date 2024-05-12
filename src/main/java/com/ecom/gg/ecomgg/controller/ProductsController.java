@@ -7,6 +7,8 @@ import com.ecom.gg.ecomgg.entity.Products;
 import com.ecom.gg.ecomgg.repository.ProductsRepository;
 import com.ecom.gg.ecomgg.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,4 +42,15 @@ public class ProductsController {
     public List<ProductsResponse> getAllProducts(){
         return productsService.getAllProducts();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductsResponse> findById(@PathVariable long id) {
+        ProductsResponse productsResponse = productsService.findById(id);
+        if (productsResponse != null) {
+            return new ResponseEntity<>(productsResponse, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
