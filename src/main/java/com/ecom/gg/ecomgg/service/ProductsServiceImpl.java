@@ -22,10 +22,10 @@ public class ProductsServiceImpl implements ProductsService{
     @Override
     public ProductsResponse save(Products products) {
         Products savedProducts = productsRepository.save(products);
-        return new ProductsResponse(savedProducts.getPrice(),savedProducts.getDescription(),
+        return new ProductsResponse(savedProducts.getId(),savedProducts.getPrice(),savedProducts.getDescription(),
                 savedProducts.getImages(),savedProducts.getCategory(),savedProducts.getName(),
                 savedProducts.getRating(),savedProducts.getSellCount(),savedProducts.getStock(),
-                savedProducts.getStoreId(),savedProducts.getId());
+                savedProducts.getStoreId());
     }
 
     @Override
@@ -33,9 +33,9 @@ public class ProductsServiceImpl implements ProductsService{
         Optional<Products> productsOptional = productsRepository.findById(id);
         if (productsOptional.isPresent()) {
             Products foundProducts = productsOptional.get();
-            return new ProductsResponse(foundProducts.getPrice(),foundProducts.getDescription(),foundProducts.getImages(),
+            return new ProductsResponse(foundProducts.getId(),foundProducts.getPrice(),foundProducts.getDescription(),foundProducts.getImages(),
                     foundProducts.getCategory(),foundProducts.getName(),foundProducts.getRating(),foundProducts.getSellCount(),foundProducts.getStock(),
-                    foundProducts.getStoreId(),foundProducts.getId());
+                    foundProducts.getStoreId());
         }
         //throw exception
         return null;
