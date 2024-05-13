@@ -14,9 +14,4 @@ public class EcomggApplication {
 	}
 
 
-	@Bean
-	public PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
-
 }

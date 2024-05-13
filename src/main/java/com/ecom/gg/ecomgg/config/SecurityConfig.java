@@ -2,6 +2,7 @@ package com.ecom.gg.ecomgg.config;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -14,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 
 //csrf --> cross site resource forgery
-@Configurable
+@Configuration
 public class SecurityConfig {
 
 
@@ -39,6 +40,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth->{
                     auth.requestMatchers("/products/**").permitAll();
                     auth.requestMatchers("/auth/**").permitAll();
+                    auth.requestMatchers("/admin/**").hasAnyAuthority("ADMIN");
                     auth.anyRequest().authenticated();
                 })
                 //.formLogin(Customizer.withDefaults())
