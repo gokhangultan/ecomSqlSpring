@@ -1,7 +1,9 @@
 package com.ecom.gg.ecomgg.controller;
 
+import com.ecom.gg.ecomgg.dto.CategoriesResponse;
 import com.ecom.gg.ecomgg.dto.ProductsCategoriesRequest;
 import com.ecom.gg.ecomgg.dto.ProductsResponse;
+import com.ecom.gg.ecomgg.dto.ProductsResponseWithCategories;
 import com.ecom.gg.ecomgg.entity.Categories;
 import com.ecom.gg.ecomgg.entity.Products;
 import com.ecom.gg.ecomgg.exceptions.ProductsException;
@@ -12,7 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/products")
@@ -40,9 +45,38 @@ public class ProductsController {
 
 
     @GetMapping("/")
-    public List<ProductsResponse> getAllProducts(){
-        return productsService.getAllProducts();
+    public List<ProductsResponseWithCategories> getAllProductsWithCategories() {
+        List<Products> productsList = productsService.getAllProducts();
+        List<ProductsResponseWithCategories> responseList = new ArrayList<>();
+
+        for (Products product : productsList) {
+            List<CategoriesResponse> categoryDetailsList = new ArrayList<>();
+            for (Categories category : product.getCategoriesList()) {
+                CategoriesResponse categoryDetails = new CategoriesResponse(category.getTitle(), category.getCode(), category.getRating());
+                categoryDetailsList.add(categoryDetails);
+            }
+            ProductsResponseWithCategories response = new ProductsResponseWithCategories(
+                    product.getId(),
+                    product.getPrice(),
+                    product.getDescription(),
+                    product.getImages(),
+                    product.getCategory(),
+                    product.getName(),
+                    product.getRating(),
+                    product.getSellCount(),
+                    product.getStock(),
+                    product.getStoreId(),
+                    categoryDetailsList
+            );
+            responseList.add(response);
+        }
+
+        return responseList;
     }
+
+
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductsResponse> findById(@PathVariable long id) {

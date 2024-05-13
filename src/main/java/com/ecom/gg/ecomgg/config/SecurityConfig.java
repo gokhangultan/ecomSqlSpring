@@ -41,6 +41,7 @@ public class SecurityConfig {
                     auth.requestMatchers("/products/**").permitAll();
                     auth.requestMatchers("/auth/**").permitAll();
                     auth.requestMatchers("/admin/**").hasAnyAuthority("ADMIN");
+                    auth.requestMatchers("/welcome/**").hasAnyAuthority("USER", "ADMIN");
                     auth.anyRequest().authenticated();
                 })
                 //.formLogin(Customizer.withDefaults())
