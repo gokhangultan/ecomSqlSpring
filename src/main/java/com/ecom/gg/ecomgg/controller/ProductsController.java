@@ -100,11 +100,14 @@ public class ProductsController {
             sortedProducts = productsService.findAllByOrderByPriceAsc();
         } else if ("desc".equalsIgnoreCase(order)) {
             sortedProducts = productsService.findAllByOrderByPriceDesc();
+        } else if ("ratingasc".equalsIgnoreCase(order)) {
+            sortedProducts = productsService.findAllOrderByRatingAsc();
+        } else if ("ratingdesc".equalsIgnoreCase(order)) {
+            sortedProducts = productsService.findAllOrderByRatingDesc();
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(sortedProducts, HttpStatus.OK);
     }
-
 
 }
