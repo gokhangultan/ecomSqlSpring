@@ -52,7 +52,7 @@ public class ProductsController {
         for (Products product : productsList) {
             List<CategoriesResponse> categoryDetailsList = new ArrayList<>();
             for (Categories category : product.getCategoriesList()) {
-                CategoriesResponse categoryDetails = new CategoriesResponse(category.getTitle(), category.getCode(), category.getRating());
+                CategoriesResponse categoryDetails = new CategoriesResponse(category.getId(),category.getTitle(), category.getCode(), category.getRating());
                 categoryDetailsList.add(categoryDetails);
             }
             ProductsResponseWithCategories response = new ProductsResponseWithCategories(
@@ -73,8 +73,6 @@ public class ProductsController {
 
         return responseList;
     }
-
-
 
 
 
