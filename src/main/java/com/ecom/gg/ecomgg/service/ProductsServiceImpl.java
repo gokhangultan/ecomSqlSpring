@@ -58,7 +58,23 @@ public class ProductsServiceImpl implements ProductsService{
                 .map(this::mapToProductsResponse)
                 .collect(Collectors.toList());
     }
+    @Override
+    public List<ProductsResponse> findAllByOrderByPriceAsc() {
+        List<Products> productsList = productsRepository.findAllByOrderByPriceAsc();
+        return mapToProductsResponseList(productsList);
+    }
 
+    @Override
+    public List<ProductsResponse> findAllByOrderByPriceDesc() {
+        List<Products> productsList = productsRepository.findAllByOrderByPriceDesc();
+        return mapToProductsResponseList(productsList);
+    }
+
+    private List<ProductsResponse> mapToProductsResponseList(List<Products> productsList) {
+        return productsList.stream()
+                .map(this::mapToProductsResponse)
+                .collect(Collectors.toList());
+    }
 
 
     @Override

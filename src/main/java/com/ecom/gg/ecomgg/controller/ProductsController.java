@@ -93,5 +93,18 @@ public class ProductsController {
     }
 
 
+    @GetMapping("/sort")
+    public ResponseEntity<List<ProductsResponse>> sortProducts(@RequestParam("order") String order) {
+        List<ProductsResponse> sortedProducts;
+        if ("asc".equalsIgnoreCase(order)) {
+            sortedProducts = productsService.findAllByOrderByPriceAsc();
+        } else if ("desc".equalsIgnoreCase(order)) {
+            sortedProducts = productsService.findAllByOrderByPriceDesc();
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(sortedProducts, HttpStatus.OK);
+    }
+
 
 }

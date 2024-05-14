@@ -12,5 +12,7 @@ public interface ProductsService {
     ProductsResponse findById(long id);
     ProductsResponse delete(long id);
     List<ProductsResponse> findByCategoryCode(@Param("categoryCode") String categoryCode);
+    List<ProductsResponse> findAllByOrderByPriceAsc(); // Ascending order
 
+    List<ProductsResponse> findAllByOrderByPriceDesc(); // Descending order
     List<Products> getAllProducts();}

@@ -13,4 +13,8 @@ public interface ProductsRepository extends JpaRepository<Products, Long> {
     @Query("SELECT p FROM Products p INNER JOIN p.categoriesList c WHERE c.code = :categoryCode")
     List<Products> findByCategoryCode(@Param("categoryCode") String categoryCode);
 
+    List<Products> findAllByOrderByPriceAsc(); // Ascending order
+
+    List<Products> findAllByOrderByPriceDesc(); // Descending order
+
 }
