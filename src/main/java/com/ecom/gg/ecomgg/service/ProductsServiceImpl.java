@@ -50,6 +50,16 @@ public class ProductsServiceImpl implements ProductsService{
         return null;
     }
 
+    @Override
+    public List<ProductsResponse> findByCategoryCode(String categoryCode) {
+        List<Products> productsList = productsRepository.findByCategoryCode(categoryCode);
+
+        return productsList.stream()
+                .map(this::mapToProductsResponse)
+                .collect(Collectors.toList());
+    }
+
+
 
     @Override
     public List<Products> getAllProducts() {

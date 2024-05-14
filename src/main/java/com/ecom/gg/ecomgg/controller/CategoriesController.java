@@ -31,7 +31,7 @@ public class CategoriesController {
         if (categoriesResponse != null) {
             return new ResponseEntity<>(categoriesResponse, HttpStatus.OK);
         } else {
-            throw new ProductsException("Ürün bulunamadı: " + id, HttpStatus.NOT_FOUND);
+            throw new ProductsException("Category bulunamadı: " + id, HttpStatus.NOT_FOUND);
         }
     }
 

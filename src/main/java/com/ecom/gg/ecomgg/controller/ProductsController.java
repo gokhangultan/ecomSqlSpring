@@ -86,5 +86,12 @@ public class ProductsController {
         }
     }
 
+    @GetMapping("/category/{categoryCode}")
+    public ResponseEntity<List<ProductsResponse>> findByCategoryCode(@PathVariable String categoryCode) {
+        List<ProductsResponse> products = productsService.findByCategoryCode(categoryCode);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+
 
 }
