@@ -38,11 +38,10 @@ public class SecurityConfig {
 
         return httpSecurity.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth->{
-                    auth.requestMatchers("/products/**").permitAll();
+                    auth.requestMatchers("/products/**").hasAuthority("ADMIN");
                     auth.requestMatchers("/auth/**").permitAll();
-                    auth.requestMatchers("/categories/**").permitAll();
-                    auth.requestMatchers("/admin/**").hasAnyAuthority("ADMIN");
-                    auth.requestMatchers("/welcome/**").hasAnyAuthority("USER", "ADMIN");
+                    auth.requestMatchers("/categories/**").hasAnyAuthority("USER", "ADMIN");
+                    auth.requestMatchers("/admin/**").hasAuthority("ADMIN");
                     auth.anyRequest().authenticated();
                 })
                 //.formLogin(Customizer.withDefaults())
