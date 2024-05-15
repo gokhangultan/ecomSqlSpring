@@ -21,4 +21,7 @@ public interface ProductsRepository extends JpaRepository<Products, Long> {
     List<Products> findAllOrderByRatingDesc();
     @Query("SELECT p FROM Products p ORDER BY p.rating ASC")
     List<Products> findAllOrderByRatingAsc();
+
+    @Query("SELECT p FROM Products p ORDER BY p.price ASC, p.rating DESC")
+    List<Products> findAllOrderByPriceAscAndRatingDesc();
 }
