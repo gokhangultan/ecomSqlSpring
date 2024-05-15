@@ -1,5 +1,6 @@
 package com.ecom.gg.ecomgg.controller;
 
+import com.ecom.gg.ecomgg.document.ProductsLog;
 import com.ecom.gg.ecomgg.dto.CategoriesResponse;
 import com.ecom.gg.ecomgg.dto.ProductsCategoriesRequest;
 import com.ecom.gg.ecomgg.dto.ProductsResponse;
@@ -8,6 +9,7 @@ import com.ecom.gg.ecomgg.entity.Categories;
 import com.ecom.gg.ecomgg.entity.Products;
 import com.ecom.gg.ecomgg.exceptions.ProductsException;
 import com.ecom.gg.ecomgg.repository.ProductsRepository;
+import com.ecom.gg.ecomgg.service.ProductsLogService;
 import com.ecom.gg.ecomgg.service.ProductsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -17,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,12 +30,14 @@ import java.util.Map;
 public class ProductsController {
 
    private ProductsService productsService;
+   private ProductsLogService productsLogService;
 
    @Autowired
-    public ProductsController(ProductsService productsService) {
+    public ProductsController(ProductsService productsService, ProductsLogService productsLogService) {
         this.productsService = productsService;
-
+        this.productsLogService = productsLogService;
     }
+
     @Operation(summary = "Save Product with Category List", description = "User need to post Product with details also need categoriesList in array, List format")
     @PostMapping("/")
     @ApiResponse(responseCode = "201", description = "JSON Must Be Same Format With ProductsCategpriesRequest DTO")
@@ -86,6 +91,15 @@ public class ProductsController {
     @ApiResponse(responseCode = "200", description = "Product id Must Be Valid")
     public ResponseEntity<ProductsResponse> findById(@PathVariable long id) {
         ProductsResponse productsResponse = productsService.findById(id);
+
+
+        //encapsulation nice example
+        ProductsLog productsLog = new ProductsLog();
+        productsLog.setProductId(productsResponse.id());
+        productsLog.setMessage("Product found successfully with given Id:" + productsLog.getProductId());
+        productsLog.setCreationTime(Instant.now());
+        productsLogService.save(productsLog);
+
         if (productsResponse != null) {
             return new ResponseEntity<>(productsResponse, HttpStatus.OK);
         } else {

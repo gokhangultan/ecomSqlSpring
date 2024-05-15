@@ -19,6 +19,18 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, productsException.getStatus());
     }
 
+
+    @ExceptionHandler
+    public ResponseEntity<ProductsErrorResponse> handleException(ProductsLogException productsLogException) {
+        ProductsErrorResponse errorResponse = new ProductsErrorResponse(
+                productsLogException.getStatus().value(),
+                productsLogException.getMessage(),
+                System.currentTimeMillis()
+        );
+        return new ResponseEntity<>(errorResponse, productsLogException.getStatus());
+    }
+
+
     @ExceptionHandler
     public ResponseEntity<ProductsErrorResponse> handleException(Exception exception){
 
