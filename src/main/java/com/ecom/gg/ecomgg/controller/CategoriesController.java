@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Tag(name="Rest API for Categories", description = "Categories Mappings With Filters.")
 @RestController
 @RequestMapping("/categories")
@@ -40,5 +42,15 @@ public class CategoriesController {
             throw new ProductsException("Category bulunamadı: " + id, HttpStatus.NOT_FOUND);
         }
     }
+
+
+    @Operation(summary = "Get All Categories", description = "Response with the list of all categories")
+    @GetMapping
+    @ApiResponse(responseCode = "200", description = "Successfully retrieved all categories")
+    public ResponseEntity<List<CategoriesResponse>> findAll() {
+        List<CategoriesResponse> categoriesResponses = categoriesService.findAll();
+        return new ResponseEntity<>(categoriesResponses, HttpStatus.OK);
+    }
+
 
 }
