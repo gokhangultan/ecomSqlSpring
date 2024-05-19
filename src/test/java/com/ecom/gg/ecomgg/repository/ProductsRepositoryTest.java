@@ -3,6 +3,8 @@ package com.ecom.gg.ecomgg.repository;
 import com.ecom.gg.ecomgg.entity.Categories;
 import com.ecom.gg.ecomgg.entity.Products;
 import io.swagger.v3.oas.annotations.media.DependentSchema;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +27,9 @@ class ProductsRepositoryTest {
         this.productsRepository = productsRepository;
     }
 
-    @DisplayName("Can Find Products By Given CategoryCode")
-    @Test
-    void findByCategoryCode() {
+
+    @BeforeEach
+    void saveTestProduct() {
         Products products = new Products();
         products.setName("testProduct");
         products.setImages("test image url");
@@ -57,17 +59,29 @@ class ProductsRepositoryTest {
         categoriesList.add(category2);
         products.setCategoriesList(categoriesList);
 
-
         productsRepository.save(products);
+    }
+
+
+    @DisplayName("Can Find Products By Given CategoryCode")
+    @Test
+    void findByCategoryCode() {
 
         List<Products> foundProducts = productsRepository.findByCategoryCode("new:season");
         assertNotNull(foundProducts);
         assertFalse(foundProducts.isEmpty());
+        assertTrue(foundProducts.stream().anyMatch(product -> "testProduct".equals(product.getName())));
     }
 
     @DisplayName("Can Order Products By Price Ascent")
     @Test
     void findAllByOrderByPriceAsc() {
+
+        List<Products> products = productsRepository.findAllByOrderByPriceAsc();
+        assertNotNull(products);
+        assertTrue(products.size() >= 2);
+        assertEquals(100, products.get(0).getPrice());
+
     }
 
     @DisplayName("Can Order Products By Price Descent")
