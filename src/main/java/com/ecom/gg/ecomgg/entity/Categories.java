@@ -1,6 +1,7 @@
 package com.ecom.gg.ecomgg.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,15 +21,26 @@ public class Categories {
     private long id;
 
     @Column(name="code")
+    @NotNull
+    @NotBlank
+    @Size(min = 3, max = 40)
     private String code;
 
     @Column(name="img")
+    @Size(min = 3, max = 100)
     private String image;
 
     @Column(name="rating")
+    @NotNull
+    @NotBlank
+    @Min(0)
+    @Max(5)
     private double rating;
 
     @Column(name="title")
+    @NotNull
+    @NotBlank
+    @Size(min = 3, max = 50)
     private String title;
 
 

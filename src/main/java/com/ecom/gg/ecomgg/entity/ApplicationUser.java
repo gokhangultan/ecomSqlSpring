@@ -1,6 +1,10 @@
 package com.ecom.gg.ecomgg.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,11 +27,27 @@ public class ApplicationUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private long id;
+
+
     @Column(name="email")
+    @NotNull
+    @NotBlank
+    @Size(min = 5, max = 50)
+    @Email
     private String email;
+
+
     @Column(name="full_name")
+    @NotNull
+    @NotBlank
+    @Size(min = 3, max = 45)
     private String fullName;
+
+
     @Column(name = "password")
+    @NotNull
+    @NotBlank
+    @Size(min = 3, max = 250)
     private String password;
 
 
