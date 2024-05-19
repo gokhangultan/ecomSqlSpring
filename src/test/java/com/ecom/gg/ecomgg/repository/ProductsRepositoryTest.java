@@ -3,10 +3,7 @@ package com.ecom.gg.ecomgg.repository;
 import com.ecom.gg.ecomgg.entity.Categories;
 import com.ecom.gg.ecomgg.entity.Products;
 import io.swagger.v3.oas.annotations.media.DependentSchema;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -61,6 +58,12 @@ class ProductsRepositoryTest {
 
         productsRepository.save(products);
     }
+/* Tüm ürünleri siler dev asamasında yapma
+@AfterEach
+void tearDown(){
+  productsRepository.deleteAll();
+}
+*/
 
 
     @DisplayName("Can Find Products By Given CategoryCode")
