@@ -24,7 +24,6 @@ public class Products {
 
     @Column(name="price")
     @NotNull
-    @NotBlank
     private double price;
 
 
@@ -53,26 +52,22 @@ public class Products {
 
     @Column(name="rating")
     @NotNull
-    @NotBlank
     @Min(0)
     @Max(5)
     private double rating;
 
     @Column(name="sell_count")
     @NotNull
-    @NotBlank
     @Min(0)
     private long sellCount;
 
     @Column(name="stock")
     @NotNull
-    @NotBlank
     @Min(0)
     private long stock;
 
     @Column(name="store_id")
     @NotNull
-    @NotBlank
     @Min(0)
     @Max(3)
     private long storeId;

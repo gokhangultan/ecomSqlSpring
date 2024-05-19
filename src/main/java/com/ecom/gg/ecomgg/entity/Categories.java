@@ -32,7 +32,6 @@ public class Categories {
 
     @Column(name="rating")
     @NotNull
-    @NotBlank
     @Min(0)
     @Max(5)
     private double rating;
